@@ -8,7 +8,7 @@ install:
 
 
 script:
-  - download_boite_postale_file.sh
+  - bash download_boite_postale_file.sh
   - python generate_map.py
   - shunit2 tests/testing_map.sh
 
