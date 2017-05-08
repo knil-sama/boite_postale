@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.6"
+
+install: 
+  - "pip install -r requirements_python.txt"
+  - curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
+
+
+script:
+    - python generate_map.py && bash tests/testing_map.sh
+
+
