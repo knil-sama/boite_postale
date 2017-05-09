@@ -18,7 +18,7 @@ def main():
         5) Generate map
     """
     with open("boite_postale.csv",encoding="utf-8") as boite_postale_file:
-        boite_postale_dataframe = read_csv(boite_postale_file,sep=";")
+        boite_postale_dataframe = read_csv(boite_postale_file,sep=";",dtype="str")
     #restrain on Paris area for optimisation of display
     boite_postale_dataframe = boite_postale_dataframe[boite_postale_dataframe["co_postal"].str.startswith("75")]
     map_folium = folium.Map(location=[48.8566, 2.3522], zoom_start=12)
