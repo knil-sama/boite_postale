@@ -4,12 +4,14 @@ python:
 
 install: 
   - "pip install -r requirements_python.txt"
+
+before_script:
   - curl -L "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz" | tar zx
 
 
 script:
   - bash download_boite_postale_file.sh
   - python generate_map.py
-  - shunit2 tests/testing_map.sh
+  - bash tests/testing_map.sh
 
 
