@@ -1,17 +1,20 @@
 language: python
 python:
-  - "3.6"
-
-install: 
-  - "pip install -r requirements_python.txt"
-
+- '3.6'
+install:
+- pip install -r requirements_python.txt
 before_script:
-  - curl -L "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz" | tar zx
-
-
+- curl -L "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/shunit2/shunit2-2.1.6.tgz"
+  | tar zx
 script:
-  - bash download_boite_postale_file.sh
-  - python generate_map.py
-  - bash tests/testing_map.sh
-
-
+- bash download_boite_postale_file.sh
+- python generate_map.py
+- bash tests/testing_map.sh
+deploy:
+  provider: s3
+  secret_access_key:
+    secure: j2jV9zX/LxvNdqe+lEqs52Ir0zz3h2/T+sWhskwlTfJIey6+kdjt5J521AvENPVYId1pj90H1IqOFyLvD4FS01zPDvYVL059TppglX6GbFqF6gMJwCHnN3FuiZa3ALHp2/3HEbP6TRXbnSLXdwp+55nkmbYlv5k3m32P0MkivFyJtDzb9YWX8kFROR0xnNVbV2xW2uzUqK379XW4GQlJDQomGM4yQj+yNtfiyZExzFw76JsritAGaAMxzVaXcryx1WvZ2P51i3OD2EhGhZI5kQMORVa6j7+V3ZI8qcoeDxRB534GP3LZTOq/w+Li3zQXZucCRDKSbRDVEUd5s0+2dv0eNlqh3+t5O1EmDlcns93xzOWSosb3ZVSbAPfR1CestY3EWWm7utKA+TXlWI6+MdrrQigDiPUXHXL/4XqKzCPb2DmTDZlkraORZEQKx+X4kjOli4nMiCdT3McIQ7QLSdedSyXVSM/CQDRashFu5Nn02U9W6dZ4EY/13GUol4tG2sBsOXnUUGZwJZ8zIo6CGsO2Qgcbq44tTqJ/tGSfmoLqD5xi/UjHKnwNfZdvoYNjfM1bZii4VVqoUJNiUOLfYL1YuGTbUmbmuvE9sfCvErNld3DJS3h5UOVM79M0ADyj2PIKsHGZPqWwBoGcJAhCPwq72ciC9XXbewO/j/0xIOg=
+  access_key_id:
+    secure: NpFCE3/CutX0Ej+W9xNlXwajgMktapz33xpRuNGpSgACaVBd6Jxa536bgIXm+My6rbqu8yuPpKuPDlQqyjujmoUY6XMXq+NYFoNHrjIEcuj9GKl7+e5316w4ZSVqUfbLedctRyIMpiY6Kzdbz/yo4PjmFDEArF9nmo5Sc8wC4l4Me3xJO9zjBu4Gt1pNyBzCRL/aqFJhyhwZZdJGlJCslBOg24n9vP4GafshANdyrvoRcrgDPir2siAC817KmcoEmcAiOSaX2nRBEq0o7qxh9atbql0pAKFdM4wxOaNHLjjFI9/+RXgNEMx3TYKbuQVpGhLK20QQrsfIKL94184S7qeAX7WuAcbVCDa6667/EgjWzrYw13b95Br0jk/hRU6F2a4omAZrDz0AGDYdKklzRpg26hvMCousx7ayxjDoZhE2HZFyZ+fk3xG1TF6rHfojPUgVKHv5tW1wMnDEjyjWDo4xKHnz3oz9U6+XKoYwqCRJYJrqlXVEtNtZbj0oJWmHrHF0D1ZAJIJrVWYc2vZ9vzp/yTkzuIvE4YKyLgbT49wBseoX1Q0lMf9g1u+FvkRBGnrC4qd48DBK7H7wox6l/7QbyqErcPAHYNIiRgSWfx/PAhgfLNt+FOeYBfk4g1/4tWavHr+YDqw9/xxeQpIvbJqgJKBYP0ESpIOHc1qnVhA=
+  bucket: "aws-website-boitepostale-5hhp4"
+  acl: public_read
