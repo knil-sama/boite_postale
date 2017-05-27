@@ -19,3 +19,4 @@ deploy:
   bucket: "aws-website-boitepostale-5hhp4"
   acl: public_read
   skip_cleanup: true
+  local_dir: build
