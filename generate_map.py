@@ -3,7 +3,7 @@
 """
 # -*- coding: utf-8 -*-
 
-from pandas import DataFrame, read_csv
+from pandas import DataFrame, read_csv, isnull
 import folium
 from io import open
 from tqdm import tqdm
@@ -18,11 +18,14 @@ def main():
         5) Generate map
     """
     with open("boite_postale.csv",encoding="utf-8") as boite_postale_file:
-        boite_postale_dataframe = read_csv(boite_postale_file,sep=";")
-    print(boite_postale_dataframe.columns)
+        boite_postale_dataframe = read_csv(boite_postale_file,sep=";",dtype="str")
+    #restrain on Paris area for optimisation of display
+    boite_postale_dataframe = boite_postale_dataframe[boite_postale_dataframe["CO_POSTAL"].str.startswith("75")]
     map_folium = folium.Map(location=[48.8566, 2.3522], zoom_start=12)
     for index,row in tqdm(boite_postale_dataframe.iterrows(),total=len(boite_postale_dataframe)):
-        folium.Marker(location=row["Latlong"].split(","),popup=row["CO_MUP"]).add_to(map_folium)
+        #some value can be missing
+        if(isnull(row["Latlong"]) == False):
+            folium.Marker(location=row["Latlong"].split(","),popup=row["CO_MUP"]).add_to(map_folium)
     map_folium.save("index.html")
 
 
