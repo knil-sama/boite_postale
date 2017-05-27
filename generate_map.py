@@ -27,7 +27,7 @@ def main():
         #some value can be missing
         if(isnull(row["Latlong"]) == False):
             address = " ".join([row["VA_NO_VOIE"],row["LB_EXTENSION"],row["LB_VOIE_EXT"]])
-            content_popup = "id : %s<br/> adresse : %s" % (row["CO_MUP"],address)
+            content_popup = "adresse : %s" % address
             folium.Marker(location=row["Latlong"].split(","),popup=content_popup).add_to(map_folium)
     map_folium.save("index.html")
 
