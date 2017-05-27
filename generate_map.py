@@ -25,7 +25,7 @@ def main():
     for index,row in tqdm(boite_postale_dataframe.iterrows(),total=len(boite_postale_dataframe)):
         #some value can be missing
         if(isnull(row["Latlong"]) == False):
-            address = " ".join(row["VA_NO_VOIE"],row["LB_EXTENSION"],row["LB_VOIE_EXT"])
+            address = " ".join([row["VA_NO_VOIE"],row["LB_EXTENSION"],row["LB_VOIE_EXT"]])
             content_popup = "id : %s\n adresse : %s" % (row["CO_MUP"],address)
             folium.Marker(location=row["Latlong"].split(","),popup=content_popup).add_to(map_folium)
     map_folium.save("index.html")
