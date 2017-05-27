@@ -2,7 +2,7 @@
 
 testSizeMaxMap()
 {
-  file_size_kb=`du -k "index.html" | cut -f1`
+  file_size_kb=`du -k "build/index.html" | cut -f1`
   assertTrue "[ $file_size_kb -lt 1800 ]"
 }
 
