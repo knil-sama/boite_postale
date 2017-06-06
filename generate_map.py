@@ -30,7 +30,7 @@ def main():
             address = " ".join([row["VA_NO_VOIE"],row["LB_EXTENSION"],row["LB_VOIE_EXT"]])
             content_popup = "adresse : %s" % address
             #need to create a different icon for each marker
-            icon = folium.features.CustomIcon("https://github.com/knil-sama/boite_postale/blob/master/small_boite_aux_lettres_cropped.png",icon_size=(14, 14))
+            icon = folium.features.CustomIcon("https://raw.githubusercontent.com/knil-sama/boite_postale/master/small_boite_aux_lettres_cropped.png",icon_size=(14, 14))
             folium.Marker(location=row["Latlong"].split(","),icon=icon,popup=content_popup).add_to(marker_cluster)
     map_folium.add_child(marker_cluster)
     map_folium.save("build/index.html")
