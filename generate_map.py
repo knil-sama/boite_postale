@@ -19,7 +19,7 @@ def main():
     """
     with open("boite_postale.csv",encoding="utf-8") as boite_postale_file:
         boite_postale_dataframe = read_csv(boite_postale_file,sep=";",dtype="str")
-    icon = folium.features.CustomIcon("small_boite_aux_lettres_cropped.png")
+    icon = folium.features.CustomIcon("small_boite_aux_lettres_cropped.png",icon_size=(14, 14))
     #restrain on Paris area for optimisation of display
     boite_postale_dataframe = boite_postale_dataframe[boite_postale_dataframe["CO_POSTAL"].str.startswith("75")]
     boite_postale_dataframe.fillna(value = {"VA_NO_VOIE":"","LB_EXTENSION":"","LB_VOIE_EXT":""},inplace=True)
