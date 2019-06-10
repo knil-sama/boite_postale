@@ -1,7 +1,13 @@
-# boite-postale
+# Project boite-postale
 
-Simple personal project trying to use open data from laposte 
+Simple personal project using use open data from laposte 
 
-with aws, folium tech and continuous integration using Travis CI
+# Stack
+
+.* AWS
+.* Folium
+.* Travis CI
+
+# Result
 
 Demo available here https://d11rurl6mjtrix.cloudfront.net/
