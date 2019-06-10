@@ -25,14 +25,14 @@ def main():
     boite_postale_dataframe.fillna(value = {"VA_NO_VOIE":"","LB_EXTENSION":"","LB_VOIE_EXT":""},inplace=True)
     map_folium = folium.Map(location=[48.8566, 2.3522], zoom_start=12)
     marker_cluster = MarkerCluster()
+    # remove missing coordinates
+    boite_postale_dataframe = boite_postale_dataframe[~ isnull(boite_postale_dataframe.Latlong)]
     for index,row in tqdm(boite_postale_dataframe.iterrows(),total=len(boite_postale_dataframe)):
-        #some value can be missing
-        if(isnull(row["Latlong"]) == False):
-            address = " ".join([row["VA_NO_VOIE"],row["LB_EXTENSION"],row["LB_VOIE_EXT"]])
-            content_popup = "adresse : %s" % address
-            #need to create a different icon for each marker
-            icon = folium.features.CustomIcon("https://raw.githubusercontent.com/knil-sama/boite_postale/master/small_boite_aux_lettres_cropped.png",icon_size=(28, 28))
-            folium.Marker(location=row["Latlong"].split(","),icon=icon,popup=content_popup).add_to(marker_cluster)
+        address = " ".join([row["VA_NO_VOIE"],row["LB_EXTENSION"],row["LB_VOIE_EXT"]])
+        content_popup = "adresse : %s" % address
+        #need to create a different icon for each marker
+        icon = folium.features.CustomIcon("https://raw.githubusercontent.com/knil-sama/boite_postale/master/small_boite_aux_lettres_cropped.png",icon_size=(28, 28))
+        folium.Marker(location=row["Latlong"].split(","),icon=icon,popup=content_popup).add_to(marker_cluster)
     map_folium.add_child(marker_cluster)
     map_folium.save("build/index.html")
 
