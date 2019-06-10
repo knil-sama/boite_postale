@@ -4,9 +4,9 @@ Simple personal project using use open data from laposte
 
 # Stack
 
-.* AWS
-.* Folium
-.* Travis CI
+* AWS s3 static website  
+* Folium  
+* Travis CI  
 
 # Result
 
