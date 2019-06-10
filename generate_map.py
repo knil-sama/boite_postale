@@ -7,7 +7,6 @@ from pandas import DataFrame, read_csv, isnull
 import folium
 from folium.plugins import MarkerCluster
 from io import open
-from tqdm import tqdm
 
 
 def create_single_marker(row):
