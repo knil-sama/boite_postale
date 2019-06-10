@@ -5,6 +5,7 @@
 
 from pandas import DataFrame, read_csv, isnull
 import folium
+from folium.plugins import MarkerCluster
 from io import open
 from tqdm import tqdm
 
@@ -23,7 +24,7 @@ def main():
     boite_postale_dataframe = boite_postale_dataframe[boite_postale_dataframe["CO_POSTAL"].str.startswith("75")]
     boite_postale_dataframe.fillna(value = {"VA_NO_VOIE":"","LB_EXTENSION":"","LB_VOIE_EXT":""},inplace=True)
     map_folium = folium.Map(location=[48.8566, 2.3522], zoom_start=12)
-    marker_cluster = folium.MarkerCluster()
+    marker_cluster = MarkerCluster()
     for index,row in tqdm(boite_postale_dataframe.iterrows(),total=len(boite_postale_dataframe)):
         #some value can be missing
         if(isnull(row["Latlong"]) == False):
