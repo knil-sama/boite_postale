@@ -8,6 +8,7 @@ import folium
 from folium.plugins import MarkerCluster
 from io import open
 
+MARKER_CLUSTER = MarkerCluster()
 
 def create_single_marker(row):
     address = " ".join([row["VA_NO_VOIE"], row["LB_EXTENSION"], row["LB_VOIE_EXT"]])
@@ -19,7 +20,7 @@ def create_single_marker(row):
     )
     folium.Marker(
         location=row["Latlong"].split(","), icon=icon, popup=content_popup
-    ).add_to(marker_cluster)
+    ).add_to(MARKER_CLUSTER)
 
 
 def main():
@@ -41,13 +42,12 @@ def main():
         value={"VA_NO_VOIE": "", "LB_EXTENSION": "", "LB_VOIE_EXT": ""}, inplace=True
     )
     map_folium = folium.Map(location=[48.8566, 2.3522], zoom_start=12)
-    marker_cluster = MarkerCluster()
     # remove missing coordinates
     boite_postale_dataframe = boite_postale_dataframe[
         ~isnull(boite_postale_dataframe.Latlong)
     ]
     boite_postale_dataframe.apply(create_single_marker, axis="columns")
-    map_folium.add_child(marker_cluster)
+    map_folium.add_child(MARKER_CLUSTER)
     map_folium.save("build/index.html")
 
 
